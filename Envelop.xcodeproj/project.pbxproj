@@ -1,0 +1,457 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9A40FDF313AF650800176B67 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40FDF213AF650800176B67 /* Cocoa.framework */; };
+		9A40FDFD13AF650800176B67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FDFB13AF650800176B67 /* InfoPlist.strings */; };
+		9A40FE0013AF650800176B67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FDFF13AF650800176B67 /* main.m */; };
+		9A40FE0313AF650800176B67 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE0113AF650800176B67 /* Credits.rtf */; };
+		9A40FE0613AF650800176B67 /* EnvelopAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */; };
+		9A40FE0913AF650800176B67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE0713AF650800176B67 /* MainMenu.xib */; };
+		9A40FE1013AF650800176B67 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40FDF213AF650800176B67 /* Cocoa.framework */; };
+		9A40FE1813AF650800176B67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE1613AF650800176B67 /* InfoPlist.strings */; };
+		9A40FE1B13AF650900176B67 /* EnvelopTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE1A13AF650900176B67 /* EnvelopTests.h */; };
+		9A40FE1D13AF650900176B67 /* EnvelopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FE1C13AF650900176B67 /* EnvelopTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9A40FE1113AF650800176B67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A40FDE513AF650800176B67 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A40FDED13AF650800176B67;
+			remoteInfo = Envelop;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9A40FDEE13AF650800176B67 /* Envelop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Envelop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A40FDF213AF650800176B67 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		9A40FDF513AF650800176B67 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		9A40FDF613AF650800176B67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9A40FDF713AF650800176B67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9A40FDFA13AF650800176B67 /* Envelop-Info.plist */ = {isa = PBXFileReference; path = "Envelop-Info.plist"; sourceTree = "<group>"; };
+		9A40FDFC13AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9A40FDFE13AF650800176B67 /* Envelop-Prefix.pch */ = {isa = PBXFileReference; path = "Envelop-Prefix.pch"; sourceTree = "<group>"; };
+		9A40FDFF13AF650800176B67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9A40FE0213AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		9A40FE0413AF650800176B67 /* EnvelopAppDelegate.h */ = {isa = PBXFileReference; path = EnvelopAppDelegate.h; sourceTree = "<group>"; };
+		9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnvelopAppDelegate.m; sourceTree = "<group>"; };
+		9A40FE0813AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9A40FE0F13AF650800176B67 /* EnvelopTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnvelopTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A40FE1513AF650800176B67 /* EnvelopTests-Info.plist */ = {isa = PBXFileReference; path = "EnvelopTests-Info.plist"; sourceTree = "<group>"; };
+		9A40FE1713AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9A40FE1913AF650800176B67 /* EnvelopTests-Prefix.pch */ = {isa = PBXFileReference; path = "EnvelopTests-Prefix.pch"; sourceTree = "<group>"; };
+		9A40FE1A13AF650900176B67 /* EnvelopTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvelopTests.h; sourceTree = "<group>"; };
+		9A40FE1C13AF650900176B67 /* EnvelopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnvelopTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9A40FDEB13AF650800176B67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A40FDF313AF650800176B67 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A40FE0B13AF650800176B67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A40FE1013AF650800176B67 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9A40FDE313AF650800176B67 = {
+			isa = PBXGroup;
+			children = (
+				9A40FDF813AF650800176B67 /* Envelop */,
+				9A40FE1313AF650800176B67 /* EnvelopTests */,
+				9A40FDF113AF650800176B67 /* Frameworks */,
+				9A40FDEF13AF650800176B67 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9A40FDEF13AF650800176B67 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FDEE13AF650800176B67 /* Envelop.app */,
+				9A40FE0F13AF650800176B67 /* EnvelopTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A40FDF113AF650800176B67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FDF213AF650800176B67 /* Cocoa.framework */,
+				9A40FDF413AF650800176B67 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A40FDF413AF650800176B67 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FDF513AF650800176B67 /* AppKit.framework */,
+				9A40FDF613AF650800176B67 /* CoreData.framework */,
+				9A40FDF713AF650800176B67 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9A40FDF813AF650800176B67 /* Envelop */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FE0413AF650800176B67 /* EnvelopAppDelegate.h */,
+				9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */,
+				9A40FE0713AF650800176B67 /* MainMenu.xib */,
+				9A40FDF913AF650800176B67 /* Supporting Files */,
+			);
+			path = Envelop;
+			sourceTree = "<group>";
+		};
+		9A40FDF913AF650800176B67 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FDFA13AF650800176B67 /* Envelop-Info.plist */,
+				9A40FDFB13AF650800176B67 /* InfoPlist.strings */,
+				9A40FDFE13AF650800176B67 /* Envelop-Prefix.pch */,
+				9A40FDFF13AF650800176B67 /* main.m */,
+				9A40FE0113AF650800176B67 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A40FE1313AF650800176B67 /* EnvelopTests */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FE1A13AF650900176B67 /* EnvelopTests.h */,
+				9A40FE1C13AF650900176B67 /* EnvelopTests.m */,
+				9A40FE1413AF650800176B67 /* Supporting Files */,
+			);
+			path = EnvelopTests;
+			sourceTree = "<group>";
+		};
+		9A40FE1413AF650800176B67 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A40FE1513AF650800176B67 /* EnvelopTests-Info.plist */,
+				9A40FE1613AF650800176B67 /* InfoPlist.strings */,
+				9A40FE1913AF650800176B67 /* EnvelopTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9A40FDED13AF650800176B67 /* Envelop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A40FE2013AF650900176B67 /* Build configuration list for PBXNativeTarget "Envelop" */;
+			buildPhases = (
+				9A40FDEA13AF650800176B67 /* Sources */,
+				9A40FDEB13AF650800176B67 /* Frameworks */,
+				9A40FDEC13AF650800176B67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Envelop;
+			productName = Envelop;
+			productReference = 9A40FDEE13AF650800176B67 /* Envelop.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9A40FE0E13AF650800176B67 /* EnvelopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A40FE2313AF650900176B67 /* Build configuration list for PBXNativeTarget "EnvelopTests" */;
+			buildPhases = (
+				9A40FE0A13AF650800176B67 /* Sources */,
+				9A40FE0B13AF650800176B67 /* Frameworks */,
+				9A40FE0C13AF650800176B67 /* Resources */,
+				9A40FE0D13AF650800176B67 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A40FE1213AF650800176B67 /* PBXTargetDependency */,
+			);
+			name = EnvelopTests;
+			productName = EnvelopTests;
+			productReference = 9A40FE0F13AF650800176B67 /* EnvelopTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9A40FDE513AF650800176B67 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 9A40FDE813AF650800176B67 /* Build configuration list for PBXProject "Envelop" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9A40FDE313AF650800176B67;
+			productRefGroup = 9A40FDEF13AF650800176B67 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9A40FDED13AF650800176B67 /* Envelop */,
+				9A40FE0E13AF650800176B67 /* EnvelopTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9A40FDEC13AF650800176B67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A40FDFD13AF650800176B67 /* InfoPlist.strings in Resources */,
+				9A40FE0313AF650800176B67 /* Credits.rtf in Resources */,
+				9A40FE0913AF650800176B67 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A40FE0C13AF650800176B67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A40FE1813AF650800176B67 /* InfoPlist.strings in Resources */,
+				9A40FE1B13AF650900176B67 /* EnvelopTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9A40FE0D13AF650800176B67 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9A40FDEA13AF650800176B67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A40FE0013AF650800176B67 /* main.m in Sources */,
+				9A40FE0613AF650800176B67 /* EnvelopAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A40FE0A13AF650800176B67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A40FE1D13AF650900176B67 /* EnvelopTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A40FE1213AF650800176B67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A40FDED13AF650800176B67 /* Envelop */;
+			targetProxy = 9A40FE1113AF650800176B67 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9A40FDFB13AF650800176B67 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A40FDFC13AF650800176B67 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9A40FE0113AF650800176B67 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A40FE0213AF650800176B67 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		9A40FE0713AF650800176B67 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A40FE0813AF650800176B67 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		9A40FE1613AF650800176B67 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A40FE1713AF650800176B67 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9A40FE1E13AF650900176B67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9A40FE1F13AF650900176B67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9A40FE2113AF650900176B67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Envelop/Envelop-Prefix.pch";
+				INFOPLIST_FILE = "Envelop/Envelop-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9A40FE2213AF650900176B67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Envelop/Envelop-Prefix.pch";
+				INFOPLIST_FILE = "Envelop/Envelop-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9A40FE2413AF650900176B67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Envelop.app/Contents/MacOS/Envelop";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EnvelopTests/EnvelopTests-Prefix.pch";
+				INFOPLIST_FILE = "EnvelopTests/EnvelopTests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9A40FE2513AF650900176B67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Envelop.app/Contents/MacOS/Envelop";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EnvelopTests/EnvelopTests-Prefix.pch";
+				INFOPLIST_FILE = "EnvelopTests/EnvelopTests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9A40FDE813AF650800176B67 /* Build configuration list for PBXProject "Envelop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A40FE1E13AF650900176B67 /* Debug */,
+				9A40FE1F13AF650900176B67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A40FE2013AF650900176B67 /* Build configuration list for PBXNativeTarget "Envelop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A40FE2113AF650900176B67 /* Debug */,
+				9A40FE2213AF650900176B67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9A40FE2313AF650900176B67 /* Build configuration list for PBXNativeTarget "EnvelopTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A40FE2413AF650900176B67 /* Debug */,
+				9A40FE2513AF650900176B67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9A40FDE513AF650800176B67 /* Project object */;
+}
