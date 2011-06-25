@@ -3,7 +3,7 @@
 //  Envelop
 //
 //  Created by Anders on 6/20/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Capasit. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

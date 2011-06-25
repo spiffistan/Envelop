@@ -7,16 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A0699C713B614C60047BAC8 /* loudnoises.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A0699C513B614C60047BAC8 /* loudnoises.c */; };
+		9A356C0513B5E4D200D92181 /* envelop.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9A356C0413B5E4D200D92181 /* envelop.icns */; };
+		9A356C0A13B5E6FE00D92181 /* envelop-icon-status.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A356C0913B5E6FE00D92181 /* envelop-icon-status.png */; };
 		9A40FDF313AF650800176B67 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40FDF213AF650800176B67 /* Cocoa.framework */; };
 		9A40FDFD13AF650800176B67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FDFB13AF650800176B67 /* InfoPlist.strings */; };
 		9A40FE0013AF650800176B67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FDFF13AF650800176B67 /* main.m */; };
 		9A40FE0313AF650800176B67 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE0113AF650800176B67 /* Credits.rtf */; };
 		9A40FE0613AF650800176B67 /* EnvelopAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */; };
-		9A40FE0913AF650800176B67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE0713AF650800176B67 /* MainMenu.xib */; };
 		9A40FE1013AF650800176B67 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40FDF213AF650800176B67 /* Cocoa.framework */; };
 		9A40FE1813AF650800176B67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE1613AF650800176B67 /* InfoPlist.strings */; };
 		9A40FE1B13AF650900176B67 /* EnvelopTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE1A13AF650900176B67 /* EnvelopTests.h */; };
 		9A40FE1D13AF650900176B67 /* EnvelopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FE1C13AF650900176B67 /* EnvelopTests.m */; };
+		9A44AA6213AFEEDF00F26675 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A44AA6113AFEEDF00F26675 /* AudioToolbox.framework */; };
+		9A6A5DB713B0E2C900E287E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6A5DB613B0E2C900E287E9 /* OpenAL.framework */; };
+		9A6A5DC713B0E30000E287E9 /* Decoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DBA13B0E2FF00E287E9 /* Decoder.m */; };
+		9A6A5DC813B0E30000E287E9 /* Finch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DBC13B0E2FF00E287E9 /* Finch.m */; };
+		9A6A5DC913B0E30000E287E9 /* PCMDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DBE13B0E2FF00E287E9 /* PCMDecoder.m */; };
+		9A6A5DCA13B0E30000E287E9 /* Reporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DC013B0E2FF00E287E9 /* Reporter.m */; };
+		9A6A5DCB13B0E30000E287E9 /* RevolverSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DC213B0E2FF00E287E9 /* RevolverSound.m */; };
+		9A6A5DCC13B0E30000E287E9 /* Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DC413B0E2FF00E287E9 /* Sample.m */; };
+		9A6A5DCD13B0E30000E287E9 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DC613B0E2FF00E287E9 /* Sound.m */; };
+		9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7F52213B522BD00BD9077 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,25 +42,45 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A0699C513B614C60047BAC8 /* loudnoises.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = loudnoises.c; sourceTree = "<group>"; };
+		9A0699C613B614C60047BAC8 /* loudnoises.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loudnoises.h; sourceTree = "<group>"; };
+		9A356C0413B5E4D200D92181 /* envelop.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = envelop.icns; sourceTree = "<group>"; };
+		9A356C0913B5E6FE00D92181 /* envelop-icon-status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "envelop-icon-status.png"; path = "../envelop-icon-status.png"; sourceTree = "<group>"; };
 		9A40FDEE13AF650800176B67 /* Envelop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Envelop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A40FDF213AF650800176B67 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9A40FDF513AF650800176B67 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		9A40FDF613AF650800176B67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9A40FDF713AF650800176B67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9A40FDFA13AF650800176B67 /* Envelop-Info.plist */ = {isa = PBXFileReference; path = "Envelop-Info.plist"; sourceTree = "<group>"; };
+		9A40FDFA13AF650800176B67 /* Envelop-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Envelop-Info.plist"; sourceTree = "<group>"; };
 		9A40FDFC13AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9A40FDFE13AF650800176B67 /* Envelop-Prefix.pch */ = {isa = PBXFileReference; path = "Envelop-Prefix.pch"; sourceTree = "<group>"; };
+		9A40FDFE13AF650800176B67 /* Envelop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Envelop-Prefix.pch"; sourceTree = "<group>"; };
 		9A40FDFF13AF650800176B67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A40FE0213AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		9A40FE0413AF650800176B67 /* EnvelopAppDelegate.h */ = {isa = PBXFileReference; path = EnvelopAppDelegate.h; sourceTree = "<group>"; };
+		9A40FE0413AF650800176B67 /* EnvelopAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvelopAppDelegate.h; sourceTree = "<group>"; };
 		9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnvelopAppDelegate.m; sourceTree = "<group>"; };
-		9A40FE0813AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9A40FE0F13AF650800176B67 /* EnvelopTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnvelopTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A40FE1513AF650800176B67 /* EnvelopTests-Info.plist */ = {isa = PBXFileReference; path = "EnvelopTests-Info.plist"; sourceTree = "<group>"; };
+		9A40FE1513AF650800176B67 /* EnvelopTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EnvelopTests-Info.plist"; sourceTree = "<group>"; };
 		9A40FE1713AF650800176B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9A40FE1913AF650800176B67 /* EnvelopTests-Prefix.pch */ = {isa = PBXFileReference; path = "EnvelopTests-Prefix.pch"; sourceTree = "<group>"; };
+		9A40FE1913AF650800176B67 /* EnvelopTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnvelopTests-Prefix.pch"; sourceTree = "<group>"; };
 		9A40FE1A13AF650900176B67 /* EnvelopTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvelopTests.h; sourceTree = "<group>"; };
 		9A40FE1C13AF650900176B67 /* EnvelopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnvelopTests.m; sourceTree = "<group>"; };
+		9A44AA6113AFEEDF00F26675 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9A6A5DB613B0E2C900E287E9 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		9A6A5DB913B0E2FF00E287E9 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		9A6A5DBA13B0E2FF00E287E9 /* Decoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Decoder.m; sourceTree = "<group>"; };
+		9A6A5DBB13B0E2FF00E287E9 /* Finch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Finch.h; sourceTree = "<group>"; };
+		9A6A5DBC13B0E2FF00E287E9 /* Finch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Finch.m; sourceTree = "<group>"; };
+		9A6A5DBD13B0E2FF00E287E9 /* PCMDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMDecoder.h; sourceTree = "<group>"; };
+		9A6A5DBE13B0E2FF00E287E9 /* PCMDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMDecoder.m; sourceTree = "<group>"; };
+		9A6A5DBF13B0E2FF00E287E9 /* Reporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reporter.h; sourceTree = "<group>"; };
+		9A6A5DC013B0E2FF00E287E9 /* Reporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reporter.m; sourceTree = "<group>"; };
+		9A6A5DC113B0E2FF00E287E9 /* RevolverSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevolverSound.h; sourceTree = "<group>"; };
+		9A6A5DC213B0E2FF00E287E9 /* RevolverSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevolverSound.m; sourceTree = "<group>"; };
+		9A6A5DC313B0E2FF00E287E9 /* Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sample.h; sourceTree = "<group>"; };
+		9A6A5DC413B0E2FF00E287E9 /* Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sample.m; sourceTree = "<group>"; };
+		9A6A5DC513B0E2FF00E287E9 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		9A6A5DC613B0E2FF00E287E9 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
+		9AA7F52213B522BD00BD9077 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A6A5DB713B0E2C900E287E9 /* OpenAL.framework in Frameworks */,
+				9A44AA6213AFEEDF00F26675 /* AudioToolbox.framework in Frameworks */,
 				9A40FDF313AF650800176B67 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,13 +105,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A356C0B13B5E70B00D92181 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				9A356C0413B5E4D200D92181 /* envelop.icns */,
+				9A356C0913B5E6FE00D92181 /* envelop-icon-status.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		9A40FDE313AF650800176B67 = {
 			isa = PBXGroup;
 			children = (
+				9A6A5DB613B0E2C900E287E9 /* OpenAL.framework */,
+				9A44AA6113AFEEDF00F26675 /* AudioToolbox.framework */,
+				9A6A5DB813B0E2FF00E287E9 /* Finch */,
 				9A40FDF813AF650800176B67 /* Envelop */,
 				9A40FE1313AF650800176B67 /* EnvelopTests */,
 				9A40FDF113AF650800176B67 /* Frameworks */,
 				9A40FDEF13AF650800176B67 /* Products */,
+				9A356C0B13B5E70B00D92181 /* Icons */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,7 +161,9 @@
 			children = (
 				9A40FE0413AF650800176B67 /* EnvelopAppDelegate.h */,
 				9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */,
-				9A40FE0713AF650800176B67 /* MainMenu.xib */,
+				9A0699C513B614C60047BAC8 /* loudnoises.c */,
+				9A0699C613B614C60047BAC8 /* loudnoises.h */,
+				9A44AA6013AFE28B00F26675 /* NIBs */,
 				9A40FDF913AF650800176B67 /* Supporting Files */,
 			);
 			path = Envelop;
@@ -150,6 +199,36 @@
 				9A40FE1913AF650800176B67 /* EnvelopTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A44AA6013AFE28B00F26675 /* NIBs */ = {
+			isa = PBXGroup;
+			children = (
+				9AA7F52213B522BD00BD9077 /* MainMenu.xib */,
+			);
+			name = NIBs;
+			sourceTree = "<group>";
+		};
+		9A6A5DB813B0E2FF00E287E9 /* Finch */ = {
+			isa = PBXGroup;
+			children = (
+				9A6A5DB913B0E2FF00E287E9 /* Decoder.h */,
+				9A6A5DBA13B0E2FF00E287E9 /* Decoder.m */,
+				9A6A5DBB13B0E2FF00E287E9 /* Finch.h */,
+				9A6A5DBC13B0E2FF00E287E9 /* Finch.m */,
+				9A6A5DBD13B0E2FF00E287E9 /* PCMDecoder.h */,
+				9A6A5DBE13B0E2FF00E287E9 /* PCMDecoder.m */,
+				9A6A5DBF13B0E2FF00E287E9 /* Reporter.h */,
+				9A6A5DC013B0E2FF00E287E9 /* Reporter.m */,
+				9A6A5DC113B0E2FF00E287E9 /* RevolverSound.h */,
+				9A6A5DC213B0E2FF00E287E9 /* RevolverSound.m */,
+				9A6A5DC313B0E2FF00E287E9 /* Sample.h */,
+				9A6A5DC413B0E2FF00E287E9 /* Sample.m */,
+				9A6A5DC513B0E2FF00E287E9 /* Sound.h */,
+				9A6A5DC613B0E2FF00E287E9 /* Sound.m */,
+			);
+			name = Finch;
+			path = Envelop/Finch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +275,9 @@
 /* Begin PBXProject section */
 		9A40FDE513AF650800176B67 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Capasit;
+			};
 			buildConfigurationList = 9A40FDE813AF650800176B67 /* Build configuration list for PBXProject "Envelop" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -221,7 +303,9 @@
 			files = (
 				9A40FDFD13AF650800176B67 /* InfoPlist.strings in Resources */,
 				9A40FE0313AF650800176B67 /* Credits.rtf in Resources */,
-				9A40FE0913AF650800176B67 /* MainMenu.xib in Resources */,
+				9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */,
+				9A356C0513B5E4D200D92181 /* envelop.icns in Resources */,
+				9A356C0A13B5E6FE00D92181 /* envelop-icon-status.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +343,14 @@
 			files = (
 				9A40FE0013AF650800176B67 /* main.m in Sources */,
 				9A40FE0613AF650800176B67 /* EnvelopAppDelegate.m in Sources */,
+				9A6A5DC713B0E30000E287E9 /* Decoder.m in Sources */,
+				9A6A5DC813B0E30000E287E9 /* Finch.m in Sources */,
+				9A6A5DC913B0E30000E287E9 /* PCMDecoder.m in Sources */,
+				9A6A5DCA13B0E30000E287E9 /* Reporter.m in Sources */,
+				9A6A5DCB13B0E30000E287E9 /* RevolverSound.m in Sources */,
+				9A6A5DCC13B0E30000E287E9 /* Sample.m in Sources */,
+				9A6A5DCD13B0E30000E287E9 /* Sound.m in Sources */,
+				9A0699C713B614C60047BAC8 /* loudnoises.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,14 +387,6 @@
 				9A40FE0213AF650800176B67 /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		9A40FE0713AF650800176B67 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9A40FE0813AF650800176B67 /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		9A40FE1613AF650800176B67 /* InfoPlist.strings */ = {
@@ -442,6 +526,7 @@
 				9A40FE2213AF650900176B67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9A40FE2313AF650900176B67 /* Build configuration list for PBXNativeTarget "EnvelopTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +535,7 @@
 				9A40FE2513AF650900176B67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
