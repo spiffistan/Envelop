@@ -20,18 +20,17 @@
     IBOutlet NSTextField *hzLabel;
     IBOutlet NSButton *pitchButton, *gainButton, *filterButton;
     IBOutlet NSProgressIndicator *spinner;
+    IBOutlet NSButton *showAdvancedButton;
+    IBOutlet NSBox *advancedBox;
     NSStatusItem *statusItem;
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSButton *playButton;
+@property (assign) IBOutlet NSButton *playButton, *showAdvancedButton;
 @property (assign) IBOutlet NSMenuItem *playItem;
 @property (assign) IBOutlet NSSlider *pitchSlider, *gainSlider, *filterSlider;
-@property (assign) IBOutlet NSProgressIndicator *spinner;
+@property (assign) IBOutlet NSBox *advancedBox;
 
-
-
-- (void) loopingPlayback;
 - (IBAction) changePitch:(id) sender;
 - (IBAction) startStopOscillatePitch:(id) sender;
 - (IBAction) changeGain:(id) sender;

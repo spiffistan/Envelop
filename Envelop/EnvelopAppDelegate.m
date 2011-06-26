@@ -21,11 +21,13 @@ NSThread *oscillatePitchThread, *oscillateGainThread;
 
 BOOL oscillateGain = NO, oscillatePitch = NO;
 
-////////////////////////////////////////////////////////////////////////////////
-
 @implementation EnvelopAppDelegate
 
-@synthesize window, pitchSlider, gainSlider, filterSlider, playItem, playButton, spinner;
+@synthesize window, pitchSlider, gainSlider, filterSlider, playItem, playButton, showAdvancedButton, advancedBox;
+
+////////////////////////////////////////////////////////////////////////////////
+// Overrides
+////////////////////////////////////////////////////////////////////////////////
 
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
 {    
@@ -34,6 +36,18 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
     [self generateNoise:nil];
     [self playPause:nil];
 }
+
+- (void) awakeFromNib
+{
+    statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
+    NSImage * image = [NSImage imageNamed:@"envelop-icon-status.png"];
+    
+    [statusItem setImage:image];
+    [statusItem setMenu:statusMenu];
+    [statusItem setHighlightMode:YES];
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 - (void) generateNoise:(id) sender
 {
@@ -85,15 +99,7 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
     }
 }
 
-- (void) awakeFromNib
-{
-    statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
-    NSImage * image = [NSImage imageNamed:@"envelop-icon-status.png"];
-    
-    [statusItem setImage:image];
-    [statusItem setMenu:statusMenu];
-    [statusItem setHighlightMode:YES];
-}
+
 
 
 - (void) oscillateGain:(id) sender
@@ -199,12 +205,14 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
 {
     if([sound playing])
     {
+        [statusItem setImage:[NSImage imageNamed:@"envelop-icon-status.png"]];
         [playItem setTitle:@"Play"];
         [playButton setTitle:@"Play"];
         [sound stop];
     }
     else
     {
+        [statusItem setImage:[NSImage imageNamed:@"envelop-icon-status-active.png"]];
         [playItem setTitle:@"Pause"];
         [playButton setTitle:@"Pause"];
         [sound play];
@@ -214,6 +222,35 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
 - (IBAction) showPrefsWindow:(id) sender
 {
     [window setIsVisible:YES];
+}
+
+- (IBAction) showHideAdvancedPanel:(id) sender
+{
+    NSRect frame = [advancedBox frame];
+    NSRect windowFrame = [window frame];
+        
+    switch ([sender state]) {
+     
+        case NSOnState:
+            
+            frame.size.height += 181;
+            windowFrame.size.height += 181;
+            windowFrame.origin.y -= 181;
+            break;
+            
+        case NSOffState:
+            
+            frame.size.height -= 181;
+            windowFrame.size.height -= 181;
+            windowFrame.origin.y += 181;
+            break;
+            
+    }
+    
+    [window setFrame:windowFrame display:YES animate:YES];
+    [advancedBox setFrame:frame];
+    
+
 }
 
 @end

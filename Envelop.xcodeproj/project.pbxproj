@@ -29,6 +29,7 @@
 		9A6A5DCC13B0E30000E287E9 /* Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DC413B0E2FF00E287E9 /* Sample.m */; };
 		9A6A5DCD13B0E30000E287E9 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A5DC613B0E2FF00E287E9 /* Sound.m */; };
 		9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7F52213B522BD00BD9077 /* MainMenu.xib */; };
+		9ABF557013B71FF20074FFBF /* envelop-icon-status-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ABF556F13B71FF20074FFBF /* envelop-icon-status-active.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		9A6A5DC513B0E2FF00E287E9 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		9A6A5DC613B0E2FF00E287E9 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
 		9AA7F52213B522BD00BD9077 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		9ABF556F13B71FF20074FFBF /* envelop-icon-status-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "envelop-icon-status-active.png"; path = "../envelop-icon-status-active.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			children = (
 				9A356C0413B5E4D200D92181 /* envelop.icns */,
 				9A356C0913B5E6FE00D92181 /* envelop-icon-status.png */,
+				9ABF556F13B71FF20074FFBF /* envelop-icon-status-active.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */,
 				9A356C0513B5E4D200D92181 /* envelop.icns in Resources */,
 				9A356C0A13B5E6FE00D92181 /* envelop-icon-status.png in Resources */,
+				9ABF557013B71FF20074FFBF /* envelop-icon-status-active.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
