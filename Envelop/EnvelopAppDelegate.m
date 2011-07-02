@@ -7,23 +7,19 @@
 //
 
 #import "EnvelopAppDelegate.h"
-#import "Finch.h"
-#import "Sound.h"
+#import "StatusVolumeView.h"
 
-#include "loudnoises.h"
+#include "AudioController.h"
+#include "NoiseUtils.h"
 
-#define SAMPLE_RATE 44100
-#define SECONDS 5
-
-Sound *sound;
-
-NSThread *oscillatePitchThread, *oscillateGainThread;
-
-BOOL oscillateGain = NO, oscillatePitch = NO;
+Float32 cutoff = 4000.0f;
+Float32 volume = 0.5f;
 
 @implementation EnvelopAppDelegate
 
-@synthesize window, pitchSlider, gainSlider, filterSlider, playItem, playButton, showAdvancedButton, advancedBox;
+@synthesize window, filterSlider, playItem, showAdvancedButton, advancedBox;
+@synthesize volumeItem, volumeSlider;
+@synthesize closePrefsButton;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Overrides
@@ -31,10 +27,12 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
 
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
 {    
-    [[Finch alloc] init];
-        
-    [self generateNoise:nil];
-    [self playPause:nil];
+    StatusVolumeView *controller = [[StatusVolumeView alloc] initWithNibName:@"StatusVolumeView" bundle:nil];
+    
+    [volumeItem setView:[controller view]];
+    
+    CreateAU();
+	StartAU();
 }
 
 - (void) awakeFromNib
@@ -46,7 +44,7 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
 }
-
+/*
 ////////////////////////////////////////////////////////////////////////////////
 
 - (void) generateNoise:(id) sender
@@ -76,46 +74,27 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
     [spinner setHidden:YES];
 
 }
+*/
 
 - (void) changeCutoff:(id) sender
 {
     [hzLabel setStringValue:[NSString stringWithFormat:@"%d Hz", [filterSlider intValue]]];
-    changeCutoff([filterSlider floatValue]);
     
-    [self generateNoise:nil];
-    
-    if([gainButton isEnabled])
-    {
-        [oscillateGainThread cancel];
-        [oscillateGainThread dealloc];
-    }
-
-    [self playPause:nil];
-    
-    if([gainButton isEnabled])
-    {
-        oscillateGainThread = [[NSThread alloc] initWithTarget:self selector:@selector(oscillateGain:) object:nil];
-        [oscillateGainThread start];
-    }
+    cutoff = [filterSlider floatValue];
 }
+/*
 
-
-
+double b = 0.2, c = 0.3, d = 1.3, t = 0;
 
 - (void) oscillateGain:(id) sender
 {
-    [[NSAutoreleasePool alloc] init];
-    
-    if(sound == NULL)
-        return;
-    
-    double b = 0.2, c = 0.3, d = 1.3, t = 0;
-    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        
     int i = 0;
-    
-    while(true)
+        
+    while(oscillateGain)
     {
-        if(!oscillateGain) return;
+        usleep(oscillateGainSpeed);
         
         double x = -c/2 * (cos((M_PI * t) / d) - 1) + b;
         
@@ -126,66 +105,22 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
             i = 0;
             [gainSlider setDoubleValue:x];
         }
-        
-        usleep(1000);
+                
         [sound setGain:(float) x];
         t += 0.0001;
     }
-}
-
-- (void) oscillatePitch:(id) sender
-{
-    [[NSAutoreleasePool alloc] init];
     
-    if(sound == NULL)
-        return;
-    
-    double b = 0.2, c = 0.1, d = 1.3, t = 0;
-    
-    int i = 0;
-    
-    while(true)
-    {
-        if(!oscillatePitch) return;
-        
-        double x = -c/2 * (cos((M_PI * t) / d) - 1) + b;
-        
-        if(i < 10) 
-            i++;
-        else 
-        {
-            i = 0;
-            [pitchSlider setDoubleValue:x];
-        }
+    [pool drain];
+} */
 
-        usleep(1000);
-        [sound setPitch:(float) x];
-        t += 0.0001;
-    }
-}
-
-- (IBAction) changePitch:(id) sender
+- (IBAction) changeVolume:(id) sender
 {
-    [sound setPitch:[pitchSlider floatValue]];
+    volume = [volumeSlider floatValue];
+    
+    SetAUVolume(volume);
 }
 
-- (IBAction) changeGain:(id) sender
-{
-    [sound setGain:[gainSlider floatValue]];
-}
-
-- (IBAction) startStopOscillatePitch:(id) sender
-{
-    if(!oscillatePitch)
-    {
-        oscillatePitchThread = [[NSThread alloc] initWithTarget:self selector:@selector(oscillatePitch:) object:nil];
-        [oscillatePitchThread start];
-    }
-    else
-    {
-        oscillatePitch = NO;
-    }
-}
+/*
 
 - (IBAction) startStopOscillateGain:(id) sender
 {
@@ -198,6 +133,30 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
     else
     {
         oscillateGain = NO;
+    }
+}
+
+- (IBAction) changeOscillationSpeed:(id) sender 
+{
+    if ([sender tag] == 1) {
+        oscillateGainSpeed = 1000;
+    } else if([sender tag] == 2) {
+        oscillateGainSpeed = 500;
+    } else if([sender tag] == 3) {
+        oscillateGainSpeed = 100;
+    }
+}
+
+// TODO constants
+
+- (IBAction) changeOscillationRange:(id) sender 
+{
+    if ([sender tag] == 1) {
+        b = 0.2, c = 0.3, d = 1.3, t = 0;
+    } else if([sender tag] == 2) {
+        b = 0.4, c = 0.3, d = 1.3, t = 0;
+    } else if([sender tag] == 3) {
+        b = 0.6, c = 0.3, d = 1.3, t = 0;
     }
 }
 
@@ -218,7 +177,7 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
         [sound play];
     }
 }
-
+*/
 - (IBAction) showPrefsWindow:(id) sender
 {
     [window setIsVisible:YES];
@@ -226,30 +185,30 @@ BOOL oscillateGain = NO, oscillatePitch = NO;
 
 - (IBAction) showHideAdvancedPanel:(id) sender
 {
-    NSRect frame = [advancedBox frame];
+    NSRect advancedBoxFrame = [advancedBox frame];
     NSRect windowFrame = [window frame];
+    
+    UInt16 sizeDiff = 232; 
         
-    switch ([sender state]) {
-     
+    switch ([sender state]) 
+    {
         case NSOnState:
             
-            frame.size.height += 181;
-            windowFrame.size.height += 181;
-            windowFrame.origin.y -= 181;
+            advancedBoxFrame.size.height += sizeDiff;
+            windowFrame.size.height += sizeDiff;
+            windowFrame.origin.y -= sizeDiff;
             break;
             
         case NSOffState:
             
-            frame.size.height -= 181;
-            windowFrame.size.height -= 181;
-            windowFrame.origin.y += 181;
+            advancedBoxFrame.size.height -= sizeDiff;
+            windowFrame.size.height -= sizeDiff;
+            windowFrame.origin.y += sizeDiff;
             break;
-            
     }
     
     [window setFrame:windowFrame display:YES animate:YES];
-    [advancedBox setFrame:frame];
-    
+    [advancedBox setFrame:advancedBoxFrame];
 
 }
 

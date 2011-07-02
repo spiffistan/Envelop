@@ -7,35 +7,32 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-#define BUFFERS 3
+#import "AudioController.h"
 
 @interface EnvelopAppDelegate : NSObject <NSApplicationDelegate> {
 @private
     NSWindow *window;
-    IBOutlet NSSlider *pitchSlider, *gainSlider, *filterSlider;
+    IBOutlet NSSlider *volumeSlider, *filterSlider;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *playItem;
-    IBOutlet NSButton *playButton, *generateButton;
     IBOutlet NSTextField *hzLabel;
-    IBOutlet NSButton *pitchButton, *gainButton, *filterButton;
-    IBOutlet NSProgressIndicator *spinner;
+    IBOutlet NSButton *filterButton, *closePrefsButton;
     IBOutlet NSButton *showAdvancedButton;
     IBOutlet NSBox *advancedBox;
-    NSStatusItem *statusItem;
+    IBOutlet NSStatusItem *statusItem;
+    IBOutlet NSMenuItem *volumeItem;
+
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSButton *playButton, *showAdvancedButton;
+@property (assign) IBOutlet NSButton *showAdvancedButton, *closePrefsButton;
 @property (assign) IBOutlet NSMenuItem *playItem;
-@property (assign) IBOutlet NSSlider *pitchSlider, *gainSlider, *filterSlider;
+@property (assign) IBOutlet NSSlider *volumeSlider, *filterSlider;
 @property (assign) IBOutlet NSBox *advancedBox;
+@property (assign) IBOutlet NSMenuItem *volumeItem;
 
-- (IBAction) changePitch:(id) sender;
-- (IBAction) startStopOscillatePitch:(id) sender;
-- (IBAction) changeGain:(id) sender;
-- (IBAction) startStopOscillateGain:(id) sender;
-- (IBAction) generateNoise:(id) sender;
+
+- (IBAction) changeVolume:(id) sender;
 - (IBAction) playPause:(id) sender;
 - (IBAction) changeCutoff:(id) sender;
 
