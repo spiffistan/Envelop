@@ -11,7 +11,9 @@
 
 @interface StatusVolumeView : NSViewController {
 @private
-    
+    IBOutlet NSSlider *volumeSlider;
 }
+
+@property (assign, readwrite) IBOutlet NSSlider *volumeSlider;
 
 @end

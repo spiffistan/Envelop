@@ -19,11 +19,12 @@
 		9A40FE1813AF650800176B67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE1613AF650800176B67 /* InfoPlist.strings */; };
 		9A40FE1B13AF650900176B67 /* EnvelopTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FE1A13AF650900176B67 /* EnvelopTests.h */; };
 		9A40FE1D13AF650900176B67 /* EnvelopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FE1C13AF650900176B67 /* EnvelopTests.m */; };
+		9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9A4167D313C0AD1300299E0F /* Envelop-new.icns */; };
 		9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */; };
 		9A5C839013B90C9A00E09D35 /* StatusVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */; };
 		9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7F52213B522BD00BD9077 /* MainMenu.xib */; };
 		9AC68A1A13BE545600A158B1 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC68A1913BE545600A158B1 /* AudioUnit.framework */; };
-		9AD2FBA513BF306800DC99E9 /* AudioController.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2FBA313BF306800DC99E9 /* AudioController.c */; };
+		9AD2FBA513BF306800DC99E9 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2FBA313BF306800DC99E9 /* AudioController.m */; };
 		9AD2FBA713BF4A4900DC99E9 /* NoiseUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2FBA613BF4A4900DC99E9 /* NoiseUtils.c */; };
 /* End PBXBuildFile section */
 
@@ -59,12 +60,13 @@
 		9A40FE1913AF650800176B67 /* EnvelopTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnvelopTests-Prefix.pch"; sourceTree = "<group>"; };
 		9A40FE1A13AF650900176B67 /* EnvelopTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvelopTests.h; sourceTree = "<group>"; };
 		9A40FE1C13AF650900176B67 /* EnvelopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnvelopTests.m; sourceTree = "<group>"; };
+		9A4167D313C0AD1300299E0F /* Envelop-new.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Envelop-new.icns"; sourceTree = "<group>"; };
 		9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusVolumeView.xib; sourceTree = "<group>"; };
 		9A5C838E13B90C9A00E09D35 /* StatusVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusVolumeView.h; sourceTree = "<group>"; };
 		9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusVolumeView.m; sourceTree = "<group>"; };
 		9AA7F52213B522BD00BD9077 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		9AC68A1913BE545600A158B1 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		9AD2FBA313BF306800DC99E9 /* AudioController.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AudioController.c; sourceTree = "<group>"; };
+		9AD2FBA313BF306800DC99E9 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		9AD2FBA413BF306800DC99E9 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
 		9AD2FBA613BF4A4900DC99E9 /* NoiseUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NoiseUtils.c; sourceTree = "<group>"; };
 		9AD2FBA813BF4AEB00DC99E9 /* NoiseUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoiseUtils.h; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				9A356C0413B5E4D200D92181 /* envelop.icns */,
 				9A3E528913BB7270006FA4EB /* envelop-icon-status-active.png */,
 				9A3E528A13BB7270006FA4EB /* envelop-icon-status.png */,
+				9A4167D313C0AD1300299E0F /* Envelop-new.icns */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -148,8 +151,8 @@
 				9A40FE0513AF650800176B67 /* EnvelopAppDelegate.m */,
 				9A5C838E13B90C9A00E09D35 /* StatusVolumeView.h */,
 				9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */,
-				9AD2FBA313BF306800DC99E9 /* AudioController.c */,
 				9AD2FBA413BF306800DC99E9 /* AudioController.h */,
+				9AD2FBA313BF306800DC99E9 /* AudioController.m */,
 				9AD2FBA613BF4A4900DC99E9 /* NoiseUtils.c */,
 				9AD2FBA813BF4AEB00DC99E9 /* NoiseUtils.h */,
 				9A44AA6013AFE28B00F26675 /* NIBs */,
@@ -276,6 +279,7 @@
 				9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */,
 				9A3E528B13BB7270006FA4EB /* envelop-icon-status-active.png in Resources */,
 				9A3E528C13BB7270006FA4EB /* envelop-icon-status.png in Resources */,
+				9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +318,7 @@
 				9A40FE0013AF650800176B67 /* main.m in Sources */,
 				9A40FE0613AF650800176B67 /* EnvelopAppDelegate.m in Sources */,
 				9A5C839013B90C9A00E09D35 /* StatusVolumeView.m in Sources */,
-				9AD2FBA513BF306800DC99E9 /* AudioController.c in Sources */,
+				9AD2FBA513BF306800DC99E9 /* AudioController.m in Sources */,
 				9AD2FBA713BF4A4900DC99E9 /* NoiseUtils.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -387,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -403,6 +409,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -420,6 +427,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

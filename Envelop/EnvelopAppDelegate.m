@@ -12,17 +12,57 @@
 #include "AudioController.h"
 #include "NoiseUtils.h"
 
-Float32 cutoff = 4000.0f;
+Float32 cutoff = 300.0f;
 Float32 volume = 0.5f;
+BOOL generateWhite = NO;
 
 @implementation EnvelopAppDelegate
 
-@synthesize window, filterSlider, playItem, showAdvancedButton, advancedBox;
-@synthesize volumeItem, volumeSlider;
+@synthesize window;
+@synthesize statusMenu, playItem, volumeItem;
+@synthesize showAdvancedButton, advancedBox;
+@synthesize volumeSlider, filterSlider, filterButton;
 @synthesize closePrefsButton;
+@synthesize hzLabel;
+
+enum {
+    kFilterBreeze,
+    kFilterRainstorm,
+    kFilterAirplane,
+    kFilterConcorde,
+    kFilterWaterfallFar,
+    kFilterWaterfallNear,
+    kFilterWaterfallUnder,
+    kFilterSR71Blackbird,
+    kFilterCustom = 99
+};
+
+enum {
+    kNoiseTypeWhite,
+    kNoiseTypeBrown,
+    kNoiseTypePink
+};
+
+enum {
+    kOscillateSlow,
+    kOscillateNormal,
+    kOscillateFast 
+};
+
+enum {
+    kOscillateLow, 
+    kOscillateMiddle,
+    kOscillateHigh
+};
+
+enum {
+    kOscillateShort, 
+    kOscillateMedium,
+    kOscillateLong
+};
 
 ////////////////////////////////////////////////////////////////////////////////
-// Overrides
+/// Overrides
 ////////////////////////////////////////////////////////////////////////////////
 
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
@@ -31,8 +71,19 @@ Float32 volume = 0.5f;
     
     [volumeItem setView:[controller view]];
     
-    CreateAU();
-	StartAU();
+    statusMenuVolumeSlider = [controller volumeSlider];
+    
+    [controller release];
+    
+    isPlaying = YES;
+    isOscillating = NO;
+    oscillateSpeed = 10000;
+        
+    audioThread = [[NSThread alloc] initWithTarget:self selector:@selector(startAudio:) object:nil];
+
+    [audioThread start];
+    
+
 }
 
 - (void) awakeFromNib
@@ -44,37 +95,18 @@ Float32 volume = 0.5f;
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
 }
-/*
+
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) generateNoise:(id) sender
+- (void) startAudio:(id) sender
 {
-    if(sound != NULL)
-    {
-        [sound stop];
-        [sound dealloc];
-    }
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        
+    CreateAU();
+	StartAU();
     
-    [spinner setHidden:NO];
-    
-    int16_t buf[SAMPLE_RATE * 5]; // malloc(SECONDS * SAMPLE_RATE * sizeof(int16_t));
-
-    brownNoise(buf, 5);
-    
-    sound = [[Sound alloc] initWithData:buf 
-                                   size:(sizeof buf) 
-                                 format:AL_FORMAT_MONO16 
-                             sampleRate:SAMPLE_RATE 
-                               duration:SECONDS];
-    
-    [sound setLoop:YES];
-    [sound setPitch:0.2f];
-    [sound setGain:0.2f];
-    
-    [spinner setHidden:YES];
-
+    [pool drain];
 }
-*/
 
 - (void) changeCutoff:(id) sender
 {
@@ -82,19 +114,87 @@ Float32 volume = 0.5f;
     
     cutoff = [filterSlider floatValue];
 }
-/*
 
-double b = 0.2, c = 0.3, d = 1.3, t = 0;
+- (void) changePresetCutoff:(id) sender 
+{
+    BOOL enableFilterSlider = NO;
+    
+    switch ([sender tag]) 
+    {
+        case kFilterBreeze: 
+            cutoff = 100.0f;
+            break;
+    
+        case kFilterRainstorm:
+            cutoff = 300.0f;
+            break;
+        
+        case kFilterAirplane:
+            cutoff = 400.0f;
+            break;
+        
+        case kFilterConcorde:
+            cutoff = 550.0f;
+            break;
+        
+        case kFilterWaterfallFar:
+            cutoff = 650.0f;
+            break;
+        
+        case kFilterWaterfallNear:
+            cutoff = 1200.0f;
+            break;
+            
+        case kFilterWaterfallUnder:
+            cutoff = 1700.0f;
+            break;
+        
+        case kFilterSR71Blackbird:
+            cutoff = 2800.0f;
+            break;
+            
+        case kFilterCustom:
+            enableFilterSlider = YES;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [hzLabel setStringValue:[NSString stringWithFormat:@"%d Hz", ((int) cutoff)]];
+    [filterSlider setEnabled:enableFilterSlider];
+    [filterSlider setFloatValue:cutoff];
+}
 
-- (void) oscillateGain:(id) sender
+- (IBAction) changeNoiseType:(id) sender
+{
+    switch ([sender tag]) {
+        case kNoiseTypeWhite:
+            generateWhite = YES;
+            break;
+            
+        case kNoiseTypeBrown:
+            generateWhite = NO;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+// TODO 
+
+Float64 b = 0.2, c = 0.3, d = 1.3, t = 0;
+
+- (IBAction) oscillateVolume:(id) sender
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         
     int i = 0;
-        
-    while(oscillateGain)
+            
+    while(isOscillating)
     {
-        usleep(oscillateGainSpeed);
+        usleep(oscillateSpeed);
         
         double x = -c/2 * (cos((M_PI * t) / d) - 1) + b;
         
@@ -103,15 +203,35 @@ double b = 0.2, c = 0.3, d = 1.3, t = 0;
         else 
         {
             i = 0;
-            [gainSlider setDoubleValue:x];
+            [volumeSlider setDoubleValue:x];
+            [statusMenuVolumeSlider setDoubleValue:x];
         }
+        
+        t += 0.001;
                 
-        [sound setGain:(float) x];
-        t += 0.0001;
+        SetAUVolume((float) x);
+        
     }
     
     [pool drain];
-} */
+} 
+
+- (IBAction) changeOscillateSpeed:(id)sender
+{
+    switch ([sender tag]) {
+        case kOscillateFast:
+            oscillateSpeed = 1000;
+            break;
+        case kOscillateNormal:
+            oscillateSpeed = 3000;
+            break;
+        case kOscillateSlow:
+            oscillateSpeed = 10000;
+            break;
+        default:
+            break;
+    }
+}
 
 - (IBAction) changeVolume:(id) sender
 {
@@ -120,22 +240,25 @@ double b = 0.2, c = 0.3, d = 1.3, t = 0;
     SetAUVolume(volume);
 }
 
-/*
-
-- (IBAction) startStopOscillateGain:(id) sender
+- (IBAction) startStopOscillateVolume:(id) sender
 {
-    if(!oscillateGain)
+    if(!isOscillating)
     {
-        oscillateGain = YES;
-        oscillateGainThread = [[NSThread alloc] initWithTarget:self selector:@selector(oscillateGain:) object:nil];
-        [oscillateGainThread start];
+        isOscillating = YES;
+        [volumeSlider setEnabled:NO];
+        [statusMenuVolumeSlider setEnabled:NO];
+        oscillateVolumeThread = [[NSThread alloc] initWithTarget:self selector:@selector(oscillateVolume:) object:nil];
+        [oscillateVolumeThread start];
     }
     else
     {
-        oscillateGain = NO;
+        isOscillating = NO;
+        [volumeSlider setEnabled:YES];
+        [statusMenuVolumeSlider setEnabled:YES];
+        [oscillateVolumeThread cancel];
     }
 }
-
+/*
 - (IBAction) changeOscillationSpeed:(id) sender 
 {
     if ([sender tag] == 1) {
@@ -158,26 +281,25 @@ double b = 0.2, c = 0.3, d = 1.3, t = 0;
     } else if([sender tag] == 3) {
         b = 0.6, c = 0.3, d = 1.3, t = 0;
     }
-}
+}*/
 
 - (IBAction) playPause:(id) sender
 {
-    if([sound playing])
+    if(isPlaying)
     {
+
         [statusItem setImage:[NSImage imageNamed:@"envelop-icon-status.png"]];
         [playItem setTitle:@"Play"];
-        [playButton setTitle:@"Play"];
-        [sound stop];
+        StopAU();
     }
     else
     {
         [statusItem setImage:[NSImage imageNamed:@"envelop-icon-status-active.png"]];
         [playItem setTitle:@"Pause"];
-        [playButton setTitle:@"Pause"];
-        [sound play];
+        StartAU();
     }
 }
-*/
+
 - (IBAction) showPrefsWindow:(id) sender
 {
     [window setIsVisible:YES];
@@ -188,7 +310,7 @@ double b = 0.2, c = 0.3, d = 1.3, t = 0;
     NSRect advancedBoxFrame = [advancedBox frame];
     NSRect windowFrame = [window frame];
     
-    UInt16 sizeDiff = 232; 
+    UInt16 sizeDiff = 232; // Pixels
         
     switch ([sender state]) 
     {
