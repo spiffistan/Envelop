@@ -23,6 +23,7 @@
 		9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7F52213B522BD00BD9077 /* MainMenu.xib */; };
 		9AC68A1A13BE545600A158B1 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC68A1913BE545600A158B1 /* AudioUnit.framework */; };
 		9AD2FBA513BF306800DC99E9 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2FBA313BF306800DC99E9 /* AudioController.m */; };
+		9AD92D661406B957004E7EAF /* AboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD92D651406B957004E7EAF /* AboutWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		9AC68A1913BE545600A158B1 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AD2FBA313BF306800DC99E9 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		9AD2FBA413BF306800DC99E9 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		9AD92D651406B957004E7EAF /* AboutWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				9AA7F52213B522BD00BD9077 /* MainMenu.xib */,
+				9AD92D651406B957004E7EAF /* AboutWindow.xib */,
 				9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */,
 			);
 			name = NIBs;
@@ -267,6 +270,7 @@
 				9A356C0513B5E4D200D92181 /* envelop.icns in Resources */,
 				9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */,
 				9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */,
+				9AD92D661406B957004E7EAF /* AboutWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

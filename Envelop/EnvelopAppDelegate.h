@@ -17,6 +17,9 @@
     NSWindow *window;
     NSThread *oscillateVolumeThread, *audioThread;
     NSStatusItem *statusItem;
+    NSUserDefaults *preferences;
+    
+    IBOutlet BOOL showDockIcon;
     
     IBOutlet NSView *audioTabSubView;
 
@@ -24,7 +27,7 @@
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *playItem;
     IBOutlet NSTextField *hzLabel;
-    IBOutlet NSButton *filterButton, *closePrefsButton;
+    IBOutlet NSButton *filterButton, *closePrefsButton, *showDockIconButton;
     IBOutlet NSButton *showAdvancedButton;
     IBOutlet NSBox *advancedBox;
     IBOutlet NSMenuItem *volumeItem;
@@ -51,6 +54,7 @@
 - (IBAction) changeOscillateRange:(id)sender;
 - (IBAction) changeOscillateSpeed:(id)sender;
 - (IBAction) changeOscillateStart:(id)sender;
+- (IBAction) showHideDockIcon:(id)sender;
 
 @end
 

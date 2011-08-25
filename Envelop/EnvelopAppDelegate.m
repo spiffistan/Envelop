@@ -30,6 +30,10 @@ BOOL generateWhite = NO;
 
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
 {    
+    preferences = [[NSUserDefaults standardUserDefaults] retain];
+    
+    showDockIcon = ![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"LSUIElement"] boolValue];
+    
     StatusVolumeView *controller = [[StatusVolumeView alloc] initWithNibName:@"StatusVolumeView" bundle:nil];
     
     volumeItem.view = controller.view;
@@ -348,6 +352,27 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
     [audioTabSubView setFrame:audioTabSubViewFrame];
     [advancedBox setFrame:advancedBoxFrame];
 
+}
+
+- (IBAction) showHideDockIcon:(NSButton *)sender
+{
+    
+    if([sender state] == NSOnState)
+    {
+        ProcessSerialNumber psn = { 0, kCurrentProcess };
+        TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+        [[[NSBundle mainBundle] infoDictionary] setValue:@"false" forKey:@"LSUIElement"];
+    }
+    else 
+    {
+        [[[NSBundle mainBundle] infoDictionary] setValue:@"true" forKey:@"LSUIElement"];
+    }
+    
+    /*
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hideDockIcon"]) {
+        ProcessSerialNumber psn = { 0, kCurrentProcess };
+        TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+    }*/
 }
 
 @end
