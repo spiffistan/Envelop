@@ -14,9 +14,10 @@
 
 AudioUnit gOutputUnit;
 
-//extern Float32 volume;
 extern Float32 cutoff;
 extern BOOL generateWhite;
+
+double m_brown = 0.0f;
 
 #define ARC4RANDOM_MAX 0x100000000
 double white(void)
@@ -26,8 +27,6 @@ double white(void)
     f -= 0.5;
     return f;
 }
-
-double m_brown = 0.0f;
 
 double brown(void)
 {
@@ -139,7 +138,7 @@ void CreateAU(void)
     input.inputProc = RenderAudio;
     input.inputProcRefCon = NULL;
         
-     err = AudioUnitSetProperty(gOutputUnit, kAudioUnitProperty_SetRenderCallback,                               kAudioUnitScope_Input, 0, &input, sizeof(input));
+     err = AudioUnitSetProperty(gOutputUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &input, sizeof(input));
     
     if (err) { printf ("AudioUnitSetProperty-CB=%d\n", err); return; }
     
@@ -154,13 +153,13 @@ void CreateAU(void)
     format.mBytesPerPacket      = 2;
     format.mBytesPerFrame       = 2;
         
-    err = AudioUnitSetProperty(gOutputUnit, kAudioUnitProperty_StreamFormat,                               kAudioUnitScope_Input, 0, &format, sizeof(format));
+    err = AudioUnitSetProperty(gOutputUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof(format));
         
     if (err) { printf ("In:  AudioUnitSetProperty-SF=%4.4s, %d\n", (char*)&err, err); return; }
         
-    // Heisenbug here: no printf if uncommented
+    // HEISENBUG here: no printf if uncommented
     
-    // err = AudioUnitSetProperty(gOutputUnit, kAudioUnitProperty_StreamFormat,                               kAudioUnitScope_Output, 0, &format, sizeof(format));
+    // err = AudioUnitSetProperty(gOutputUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &format, sizeof(format));
             
     // if (err) { printf ("Out: AudioUnitSetProperty-SF=%4.4s, %d\n", (char*)&err, err); return; }
     
