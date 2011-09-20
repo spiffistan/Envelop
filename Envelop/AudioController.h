@@ -13,10 +13,23 @@
     
 }
 
-OSStatus RenderAudio(void *, AudioUnitRenderActionFlags *, const AudioTimeStamp*, UInt32, UInt32, AudioBufferList *);
+OSStatus RenderNoiseCallback(void *, AudioUnitRenderActionFlags *, const AudioTimeStamp*, UInt32, UInt32, AudioBufferList *);
+OSStatus RenderMicrophoneCallback(void *, AudioUnitRenderActionFlags *, const AudioTimeStamp*, UInt32, UInt32, AudioBufferList *);
+
 void CreateAU(void);
 void StartAU(void);
 void StopAU(void);
+/*
+void CreateMicrophoneAU(void);
+void StartMicrophoneAU(void);
+void StopMicrophoneAU(void);*/
+
+enum {
+    kNoiseTypeWhite,
+    kNoiseTypeBrown,
+    kNoiseTypePink
+};
+
 void SetAUVolume(float);
 
 @end

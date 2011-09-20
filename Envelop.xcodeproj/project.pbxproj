@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A356C0513B5E4D200D92181 /* envelop.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9A356C0413B5E4D200D92181 /* envelop.icns */; };
 		9A40FDF313AF650800176B67 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A40FDF213AF650800176B67 /* Cocoa.framework */; };
 		9A40FDFD13AF650800176B67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A40FDFB13AF650800176B67 /* InfoPlist.strings */; };
 		9A40FE0013AF650800176B67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A40FDFF13AF650800176B67 /* main.m */; };
@@ -20,7 +19,12 @@
 		9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9A4167D313C0AD1300299E0F /* Envelop-new.icns */; };
 		9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */; };
 		9A5C839013B90C9A00E09D35 /* StatusVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */; };
+		9A84028A140E7E1600D460FE /* MainMenu_New.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A840289140E7E1600D460FE /* MainMenu_New.xib */; };
 		9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7F52213B522BD00BD9077 /* MainMenu.xib */; };
+		9AA802DE140955C3002AD1A5 /* statusbar-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA802DC140955C3002AD1A5 /* statusbar-active.png */; };
+		9AA802DF140955C3002AD1A5 /* statusbar-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA802DD140955C3002AD1A5 /* statusbar-inactive.png */; };
+		9AB150AD140F956500F9B456 /* SMDoubleSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB150AA140F956400F9B456 /* SMDoubleSlider.m */; };
+		9AB150AE140F956500F9B456 /* SMDoubleSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB150AC140F956400F9B456 /* SMDoubleSliderCell.m */; };
 		9AC68A1A13BE545600A158B1 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC68A1913BE545600A158B1 /* AudioUnit.framework */; };
 		9AD2FBA513BF306800DC99E9 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2FBA313BF306800DC99E9 /* AudioController.m */; };
 		9AD92D661406B957004E7EAF /* AboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD92D651406B957004E7EAF /* AboutWindow.xib */; };
@@ -37,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9A356C0413B5E4D200D92181 /* envelop.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = envelop.icns; sourceTree = "<group>"; };
 		9A40FDEE13AF650800176B67 /* Envelop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Envelop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A40FDF213AF650800176B67 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9A40FDF513AF650800176B67 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -60,7 +63,14 @@
 		9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusVolumeView.xib; sourceTree = "<group>"; };
 		9A5C838E13B90C9A00E09D35 /* StatusVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusVolumeView.h; sourceTree = "<group>"; };
 		9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusVolumeView.m; sourceTree = "<group>"; };
+		9A840289140E7E1600D460FE /* MainMenu_New.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu_New.xib; sourceTree = "<group>"; };
 		9AA7F52213B522BD00BD9077 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		9AA802DC140955C3002AD1A5 /* statusbar-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statusbar-active.png"; sourceTree = "<group>"; };
+		9AA802DD140955C3002AD1A5 /* statusbar-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statusbar-inactive.png"; sourceTree = "<group>"; };
+		9AB150A9140F956400F9B456 /* SMDoubleSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDoubleSlider.h; sourceTree = "<group>"; };
+		9AB150AA140F956400F9B456 /* SMDoubleSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDoubleSlider.m; sourceTree = "<group>"; };
+		9AB150AB140F956400F9B456 /* SMDoubleSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDoubleSliderCell.h; sourceTree = "<group>"; };
+		9AB150AC140F956400F9B456 /* SMDoubleSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDoubleSliderCell.m; sourceTree = "<group>"; };
 		9AC68A1913BE545600A158B1 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AD2FBA313BF306800DC99E9 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		9AD2FBA413BF306800DC99E9 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
@@ -91,8 +101,9 @@
 		9A356C0B13B5E70B00D92181 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				9A356C0413B5E4D200D92181 /* envelop.icns */,
 				9A4167D313C0AD1300299E0F /* Envelop-new.icns */,
+				9AA802DC140955C3002AD1A5 /* statusbar-active.png */,
+				9AA802DD140955C3002AD1A5 /* statusbar-inactive.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -100,6 +111,7 @@
 		9A40FDE313AF650800176B67 = {
 			isa = PBXGroup;
 			children = (
+				9AB150B0140F956A00F9B456 /* Util */,
 				9AC68A1913BE545600A158B1 /* AudioUnit.framework */,
 				9A40FDF813AF650800176B67 /* Envelop */,
 				9A40FE1313AF650800176B67 /* EnvelopTests */,
@@ -188,10 +200,30 @@
 			isa = PBXGroup;
 			children = (
 				9AA7F52213B522BD00BD9077 /* MainMenu.xib */,
+				9A840289140E7E1600D460FE /* MainMenu_New.xib */,
 				9AD92D651406B957004E7EAF /* AboutWindow.xib */,
 				9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */,
 			);
 			name = NIBs;
+			sourceTree = "<group>";
+		};
+		9AB150B0140F956A00F9B456 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				9AB150B1140F957D00F9B456 /* SMDoubleSlider */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		9AB150B1140F957D00F9B456 /* SMDoubleSlider */ = {
+			isa = PBXGroup;
+			children = (
+				9AB150A9140F956400F9B456 /* SMDoubleSlider.h */,
+				9AB150AA140F956400F9B456 /* SMDoubleSlider.m */,
+				9AB150AB140F956400F9B456 /* SMDoubleSliderCell.h */,
+				9AB150AC140F956400F9B456 /* SMDoubleSliderCell.m */,
+			);
+			name = SMDoubleSlider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,10 +299,12 @@
 				9A40FDFD13AF650800176B67 /* InfoPlist.strings in Resources */,
 				9A40FE0313AF650800176B67 /* Credits.rtf in Resources */,
 				9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */,
-				9A356C0513B5E4D200D92181 /* envelop.icns in Resources */,
 				9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */,
 				9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */,
 				9AD92D661406B957004E7EAF /* AboutWindow.xib in Resources */,
+				9AA802DE140955C3002AD1A5 /* statusbar-active.png in Resources */,
+				9AA802DF140955C3002AD1A5 /* statusbar-inactive.png in Resources */,
+				9A84028A140E7E1600D460FE /* MainMenu_New.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +344,8 @@
 				9A40FE0613AF650800176B67 /* EnvelopAppDelegate.m in Sources */,
 				9A5C839013B90C9A00E09D35 /* StatusVolumeView.m in Sources */,
 				9AD2FBA513BF306800DC99E9 /* AudioController.m in Sources */,
+				9AB150AD140F956500F9B456 /* SMDoubleSlider.m in Sources */,
+				9AB150AE140F956500F9B456 /* SMDoubleSliderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

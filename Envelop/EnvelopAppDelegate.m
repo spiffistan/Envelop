@@ -12,15 +12,16 @@
 
 Float32 cutoff = 300.0f;
 Float32 volume = 0.5f;
-BOOL generateWhite = NO;
+BOOL enableFilter = YES;
+int noiseType = 1;
 
 @implementation EnvelopAppDelegate
 
 @synthesize window;
 @synthesize statusMenu, playItem, volumeItem;
 @synthesize showAdvancedButton, advancedBox, audioTabSubView;
-@synthesize volumeSlider, filterSlider, filterButton;
-@synthesize closePrefsButton;
+@synthesize volumeSlider, filterSlider, rangeSlider, oscillateSpeedSlider, filterButton, startStopButton;
+@synthesize closePrefsButton, oscillationButton;
 @synthesize hzLabel;
 @synthesize noiseTypePopUp, oscillationRangePopUp, oscillationSpeedPopUp, oscillationStartPopUp, oscillationTypePopUp, filterPopUp;
 
@@ -28,9 +29,25 @@ BOOL generateWhite = NO;
 /// Overrides
 ////////////////////////////////////////////////////////////////////////////////
 
+- (id)init
+{
+
+    
+    b = 0.3f, c = 0.3f, d = 1, t = 0;    
+    
+    return (self);
+}
+
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
 {    
-    preferences = [[NSUserDefaults standardUserDefaults] retain];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserver:self
+           selector:@selector(windowWillClose:)
+               name:NSWindowWillCloseNotification
+             object:nil];
+    
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
     
     showDockIcon = ![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"LSUIElement"] boolValue];
     
@@ -40,32 +57,54 @@ BOOL generateWhite = NO;
     statusMenuVolumeSlider = controller.volumeSlider;
     
     [controller release];
-    
-    [noiseTypePopUp selectItemWithTag:kNoiseTypeBrown];
-    [oscillationRangePopUp selectItemWithTag:kOscillateRangeMedium];
-    [oscillationStartPopUp selectItemWithTag:kOscillateStartMiddle];
-    [oscillationSpeedPopUp selectItemWithTag:kOscillateSpeedNormal];
-    [filterPopUp selectItemWithTag:kFilterRainstorm];
+        
+    [rangeSlider setMaxValue:1.0f];
+    [rangeSlider setMinValue:0.0f];
+    [rangeSlider setFloatHiValue:(b+c)];
+    [rangeSlider setFloatLoValue:b];
+    [rangeSlider setNumberOfTickMarks:25];
+    [rangeSlider setContinuous:YES];
+    [rangeSlider setAction:@selector(changeRange:)];
+    [rangeSlider setTickMarkPosition:NSTickMarkAbove];
+    [[rangeSlider cell] setControlSize:NSSmallControlSize];
+    [rangeSlider setEnabled:NO];
     
     isPlaying = YES;
     isOscillating = NO;
     oscillateSpeed = 2500;
-        
-    audioThread = [[NSThread alloc] initWithTarget:self selector:@selector(startAudio:) object:nil];
-
-    [audioThread start];
+    easer = &easeInOutQuad;
     
+    if([preferences integerForKey:@"appHasLaunched"])
+    {
+        [self loadPrefs];
+    }
+    else 
+    {
+        [preferences setInteger:1 forKey:@"appHasLaunched"];
+        [noiseTypePopUp selectItemWithTag:kNoiseTypeBrown];
+        [oscillationSpeedPopUp selectItemWithTag:kOscillateSpeedNormal];
+        [filterPopUp selectItemWithTag:kFilterRainstorm];
+    }
+        
+    audioThreadOut = [[NSThread alloc] initWithTarget:self selector:@selector(startAudio:) object:nil];
 
+    [audioThreadOut start];
+    
 }
 
 - (void) awakeFromNib
 {
     statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
-    NSImage * image = [NSImage imageNamed:@"envelop-statusbar-active-new-20.png"];
+    NSImage * image = [NSImage imageNamed:@"statusbar-active.png"];
     
     [statusItem setImage:image];
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    [self savePrefs];
 }
 
 
@@ -78,10 +117,21 @@ BOOL generateWhite = NO;
         
     CreateAU();
 	StartAU();
+
     
     [pool drain];
 }
-
+/*
+- (void) startMic:(id) sender
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    CreateMicrophoneAU();
+	StartMicrophoneAU();
+    
+    [pool drain];
+}
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +141,12 @@ BOOL generateWhite = NO;
     [hzLabel setStringValue:[NSString stringWithFormat:@"%d Hz", [filterSlider intValue]]];
     
     cutoff = [filterSlider floatValue];
+}
+
+- (void) changeRange:(SMDoubleSlider *) sender
+{
+    b = [sender doubleLoValue];
+    c = [sender doubleHiValue] - b;
 }
 
 
@@ -115,9 +171,6 @@ BOOL generateWhite = NO;
         case kFilterCustom:
             enableFilterSlider = YES;
             break;
-            
-        default:
-            break;
     }
     
     [hzLabel setStringValue:[NSString stringWithFormat:@"%d Hz", ((int) cutoff)]];
@@ -131,40 +184,80 @@ BOOL generateWhite = NO;
 
 - (IBAction) changeNoiseType:(id) sender
 {
-    switch ([sender tag]) {
-        case kNoiseTypeWhite:
-            generateWhite = YES;
+    noiseType = (int) [sender tag];
+}
+
+double easeInOutQuad  (double t, double b, double c, double d) 
+{
+	if (t < d / 2) return 2 * c * t * t / (d * d) + b;
+	double ts = t - d/2;
+	return -2 * c * ts * ts / (d * d) + 2 * c * ts / d + c / 2 + b;
+}
+
+double easeInOutCubic  (double t, double b, double c, double d) 
+{
+    if ((t /= d / 2) < 1)
+    return c / 2 * t * t * t + b;
+    return c / 2 * ((t -= 2) * t * t + 2) + b;
+}
+
+double easeInOutSine (double t, double b, double c, double d) 
+{
+	return -c/2 * (cos(M_PI*t/d) - 1) + b;
+}
+
+double easeInOutExpo (double t, double b, double c, double d) 
+{
+    if (t == 0) return b;
+    if (t == d) return b+c;
+    if ((t /= d/2) < 1) return c/2 * pow(2, 10 * (t - 1)) + b;
+    return c/2 * (-pow(2, -10 * --t) + 2) + b;
+}
+
+
+- (IBAction) changeEasing:(id)sender
+{
+    // NSLog(@"%ld", [sender tag]);
+
+    switch ([sender tag]) 
+    {
+        case kEasingQuad:
+            easer = &easeInOutQuad;
             break;
-            
-        case kNoiseTypeBrown:
-            generateWhite = NO;
+        case kEasingCubic:
+            easer = &easeInOutCubic;
             break;
-            
-        default:
+        case kEasingSine: 
+            easer = &easeInOutSine;
+            break;
+        case kEasingExpo:
+            easer = &easeInOutExpo;
             break;
     }
 }
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 
-Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: counter
 
-- (IBAction) oscillateVolume:(id) sender
-{
+BOOL countUp = YES;
+
+- (void) oscillateVolume
+{    
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         
     int i = 0;
     double x;
             
     while(isOscillating)
-    {
+    {        
         usleep(oscillateSpeed);
          
-        x = -c/2 * (cos((M_PI * t) / d) - 1) + b;
+        // x = -c/2 * (cos((M_PI * t) / d) - 1) + b;
+        
+        x = easer(t, b, c, d);
                 
-        if(i < 10) 
+        if(i < 5) 
             i++;
         else 
         {
@@ -173,8 +266,16 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
             [statusMenuVolumeSlider setDoubleValue:x];
         }
         
-        t += 0.001;
-                
+        if(t >= 1)
+            countUp = NO;
+        else if(t < 0)
+            countUp = YES;
+            
+        if(countUp)
+            t += 0.001;
+        else
+            t -= 0.001;
+            
         SetAUVolume((float) x);
     }
     
@@ -212,15 +313,23 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
     switch ([sender tag]) 
     {
         case kOscillateSpeedFast:
+            [oscillateSpeedSlider setEnabled:NO];
             oscillateSpeed = 1000;
             break;
         case kOscillateSpeedNormal:
+            [oscillateSpeedSlider setEnabled:NO];
             oscillateSpeed = 2500;
             break;
         case kOscillateSpeedSlow:
+            [oscillateSpeedSlider setEnabled:NO];
             oscillateSpeed = 7000;
             break;
-        default:
+        case kOscillateSpeedCustom:
+            [oscillateSpeedSlider setEnabled:YES];
+            oscillateSpeed = [oscillateSpeedSlider doubleValue];
+            break;
+        case kOscillateSpeedSlider:
+            oscillateSpeed = [oscillateSpeedSlider doubleValue];
             break;
     }
 }
@@ -265,22 +374,39 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
 
 - (IBAction) startStopOscillateVolume:(id) sender
 {
-    if(!isOscillating)
+    if([sender state] == NSOnState) 
+    {
+        [self oscillate:YES];
+    } 
+    else if([sender state] == NSOffState) 
+    {
+        [self oscillate:NO];
+    }
+
+}
+
+- (void) oscillate:(BOOL) start
+{
+    if(!start)
+    {
+        if([oscillateVolumeThread isExecuting]) {
+            [oscillateVolumeThread cancel];
+            if([oscillateVolumeThread isFinished]) {
+                isOscillating = NO;
+                volumeSlider.enabled = YES;
+                rangeSlider.enabled = NO;
+                statusMenuVolumeSlider.enabled = YES;
+            }
+        }
+    } 
+    else
     {
         isOscillating = YES;
         volumeSlider.enabled = NO;
+        rangeSlider.enabled = YES;
         statusMenuVolumeSlider.enabled = NO;
-        
-        oscillateVolumeThread = [[NSThread alloc] initWithTarget:self selector:@selector(oscillateVolume:) object:nil];
+        oscillateVolumeThread = [[NSThread alloc] initWithTarget:self selector:@selector(oscillateVolume) object:nil];
         [oscillateVolumeThread start];
-    }
-    else
-    {
-        isOscillating = NO;
-        volumeSlider.enabled = YES;
-        statusMenuVolumeSlider.enabled = YES;
-        
-        [oscillateVolumeThread cancel];
     }
 }
 
@@ -293,16 +419,17 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
     if(isPlaying)
     {
 
-        statusItem.image = [NSImage imageNamed:@"envelop-statusbar-active-new-20.png"];
+        statusItem.image = [NSImage imageNamed:@"statusbar-inactive.png"];
         playItem.title = @"Play";
-        
+        startStopButton.title = @"Play";
         isPlaying = NO;
         StopAU();
     }
     else
     {
-        statusItem.image = [NSImage imageNamed:@"envelop-statusbar-inactive-new-20.png"];
+        statusItem.image = [NSImage imageNamed:@"statusbar-active.png"];
         playItem.title = @"Pause";
+        startStopButton.title = @"Pause";
         isPlaying = YES;
         StartAU();
     }
@@ -315,6 +442,103 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
 - (IBAction) showPrefsWindow:(id) sender
 {
     window.isVisible = YES;
+}
+
+
+
+- (void) savePrefs
+{    
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+    
+    NSLog(@"window closing: %ld", [noiseTypePopUp tag]);
+
+    
+    if(preferences)
+    {
+    
+        [preferences setInteger:[oscillationButton state] forKey:@"enableOscillation"];
+        [preferences setInteger:[oscillationSpeedPopUp tag] forKey:@"oscillationSpeed"];
+        [preferences setFloat:[rangeSlider floatLoValue] forKey:@"oscillationStart"];
+        [preferences setFloat:[rangeSlider floatHiValue] forKey:@"oscillationRange"];
+        [preferences setInteger:[noiseTypePopUp tag] forKey:@"noiseType"];
+        
+        
+        [preferences synchronize];
+    }
+    
+    [preferences release];
+}
+
+- (void) loadPrefs
+{    
+    NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
+    
+    if(preferences) 
+    {
+        long pEnableOscillation = [preferences integerForKey:@"enableOscillation"];
+        long pOscillationSpeed = [preferences integerForKey:@"oscillationSpeed"];
+        float pOscillationStart = [preferences floatForKey:@"oscillationStart"];
+        float pOscillationRange = [preferences floatForKey:@"oscillationRange"];
+        long pNoiseType = [preferences integerForKey:@"noiseType"];
+        
+        // Oscillation Speed
+        [oscillationSpeedPopUp setState:pOscillationSpeed];
+                
+        switch (pOscillationSpeed) 
+        {
+            case kOscillateSpeedFast:
+                [oscillateSpeedSlider setEnabled:NO];
+                oscillateSpeed = 1000;
+                break;
+            case kOscillateSpeedNormal:
+                [oscillateSpeedSlider setEnabled:NO];
+                oscillateSpeed = 2500;
+                break;
+            case kOscillateSpeedSlow:
+                [oscillateSpeedSlider setEnabled:NO];
+                oscillateSpeed = 7000;
+                break;
+            case kOscillateSpeedCustom:
+                [oscillateSpeedSlider setEnabled:YES];
+                oscillateSpeed = [oscillateSpeedSlider doubleValue];
+                break;
+            case kOscillateSpeedSlider:
+                oscillateSpeed = [oscillateSpeedSlider doubleValue];
+                break;
+        }
+        
+        // Oscillation Start
+                        
+        b = pOscillationStart;
+        c = pOscillationRange;
+        
+        // Oscillation Range
+        
+        [oscillationRangePopUp setState:pOscillationRange];
+        
+        [rangeSlider setFloatHiValue:b+c];
+        [rangeSlider setFloatLoValue:b];
+        
+        [oscillationTypePopUp setState:pNoiseType];
+        
+        noiseType = (int) pNoiseType;
+        
+        // Enable Oscillation
+        
+        NSLog(@"%ld", pEnableOscillation);
+        
+        if(pEnableOscillation) {
+            [oscillationButton setState:NSOnState];
+            [self oscillate:YES];
+        } else {
+            [oscillationButton setState:NSOffState];
+            [self oscillate:NO];
+        }
+
+        // [noiseTypePopUp setState:noiseType];
+    }
+    
+    [preferences release];
 }
 
 
@@ -354,6 +578,8 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
 
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 - (IBAction) showHideDockIcon:(NSButton *)sender
 {
     
@@ -373,6 +599,20 @@ Float64 b = 0.3, c = 0.3, d = 1, t = 0; // b: offset, c: range, d: divider, t: c
         ProcessSerialNumber psn = { 0, kCurrentProcess };
         TransformProcessType(&psn, kProcessTransformToForegroundApplication);
     }*/
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+- (IBAction) startStopFilter:(NSButton *)sender
+{
+    if([sender state] == NSOnState)
+    {
+        enableFilter = YES;
+    }
+    else 
+    {
+        enableFilter = NO;
+    }
 }
 
 @end
