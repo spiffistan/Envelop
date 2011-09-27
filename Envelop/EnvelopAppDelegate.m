@@ -252,9 +252,7 @@ BOOL countUp = YES;
     while(isOscillating)
     {        
         usleep(oscillateSpeed);
-         
-        // x = -c/2 * (cos((M_PI * t) / d) - 1) + b;
-        
+                 
         x = easer(t, b, c, d);
                 
         if(i < 5) 
@@ -449,20 +447,15 @@ BOOL countUp = YES;
 - (void) savePrefs
 {    
     NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
-    
-    NSLog(@"window closing: %ld", [noiseTypePopUp tag]);
-
-    
+        
     if(preferences)
     {
-    
         [preferences setInteger:[oscillationButton state] forKey:@"enableOscillation"];
         [preferences setInteger:[oscillationSpeedPopUp tag] forKey:@"oscillationSpeed"];
         [preferences setFloat:[rangeSlider floatLoValue] forKey:@"oscillationStart"];
-        [preferences setFloat:[rangeSlider floatHiValue] forKey:@"oscillationRange"];
+        [preferences setFloat:([rangeSlider floatHiValue]-[rangeSlider floatLoValue]) forKey:@"oscillationRange"];
         [preferences setInteger:[noiseTypePopUp tag] forKey:@"noiseType"];
-        
-        
+
         [preferences synchronize];
     }
     

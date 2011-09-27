@@ -19,7 +19,6 @@
 		9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9A4167D313C0AD1300299E0F /* Envelop-new.icns */; };
 		9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */; };
 		9A5C839013B90C9A00E09D35 /* StatusVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */; };
-		9A84028A140E7E1600D460FE /* MainMenu_New.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A840289140E7E1600D460FE /* MainMenu_New.xib */; };
 		9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA7F52213B522BD00BD9077 /* MainMenu.xib */; };
 		9AA802DE140955C3002AD1A5 /* statusbar-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA802DC140955C3002AD1A5 /* statusbar-active.png */; };
 		9AA802DF140955C3002AD1A5 /* statusbar-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA802DD140955C3002AD1A5 /* statusbar-inactive.png */; };
@@ -27,7 +26,6 @@
 		9AB150AE140F956500F9B456 /* SMDoubleSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB150AC140F956400F9B456 /* SMDoubleSliderCell.m */; };
 		9AC68A1A13BE545600A158B1 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC68A1913BE545600A158B1 /* AudioUnit.framework */; };
 		9AD2FBA513BF306800DC99E9 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2FBA313BF306800DC99E9 /* AudioController.m */; };
-		9AD92D661406B957004E7EAF /* AboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD92D651406B957004E7EAF /* AboutWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +61,6 @@
 		9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusVolumeView.xib; sourceTree = "<group>"; };
 		9A5C838E13B90C9A00E09D35 /* StatusVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusVolumeView.h; sourceTree = "<group>"; };
 		9A5C838F13B90C9A00E09D35 /* StatusVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusVolumeView.m; sourceTree = "<group>"; };
-		9A840289140E7E1600D460FE /* MainMenu_New.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu_New.xib; sourceTree = "<group>"; };
 		9AA7F52213B522BD00BD9077 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		9AA802DC140955C3002AD1A5 /* statusbar-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statusbar-active.png"; sourceTree = "<group>"; };
 		9AA802DD140955C3002AD1A5 /* statusbar-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statusbar-inactive.png"; sourceTree = "<group>"; };
@@ -74,7 +71,6 @@
 		9AC68A1913BE545600A158B1 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		9AD2FBA313BF306800DC99E9 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		9AD2FBA413BF306800DC99E9 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
-		9AD92D651406B957004E7EAF /* AboutWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				9AA7F52213B522BD00BD9077 /* MainMenu.xib */,
-				9A840289140E7E1600D460FE /* MainMenu_New.xib */,
-				9AD92D651406B957004E7EAF /* AboutWindow.xib */,
 				9A5C838B13B909A800E09D35 /* StatusVolumeView.xib */,
 			);
 			name = NIBs;
@@ -301,10 +295,8 @@
 				9AA7F52313B522BD00BD9077 /* MainMenu.xib in Resources */,
 				9A5C838C13B909A800E09D35 /* StatusVolumeView.xib in Resources */,
 				9A4167D413C0AD1300299E0F /* Envelop-new.icns in Resources */,
-				9AD92D661406B957004E7EAF /* AboutWindow.xib in Resources */,
 				9AA802DE140955C3002AD1A5 /* statusbar-active.png in Resources */,
 				9AA802DF140955C3002AD1A5 /* statusbar-inactive.png in Resources */,
-				9A84028A140E7E1600D460FE /* MainMenu_New.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
