@@ -1162,14 +1162,6 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">window</string>
-						<reference key="source" ref="232748680"/>
-						<reference key="destination" ref="394144024"/>
-					</object>
-					<int key="connectionID">1361</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">volumeSlider</string>
 						<reference key="source" ref="232748680"/>
 						<reference key="destination" ref="193924309"/>
@@ -1401,14 +1393,6 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 					<int key="connectionID">1568</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">startStopFilter:</string>
-						<reference key="source" ref="232748680"/>
-						<reference key="destination" ref="139861448"/>
-					</object>
-					<int key="connectionID">1569</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">filterSlider</string>
 						<reference key="source" ref="232748680"/>
@@ -1482,27 +1466,35 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">playPause:</string>
-						<reference key="source" ref="232748680"/>
-						<reference key="destination" ref="127221991"/>
-					</object>
-					<int key="connectionID">1599</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">startStopOscillateVolume</string>
-						<reference key="source" ref="232748680"/>
-						<reference key="destination" ref="645363741"/>
-					</object>
-					<int key="connectionID">1600</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">changeOscillateSpeed:</string>
 						<reference key="source" ref="232748680"/>
 						<reference key="destination" ref="287951468"/>
 					</object>
 					<int key="connectionID">1601</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="394144024"/>
+						<reference key="destination" ref="232748680"/>
+					</object>
+					<int key="connectionID">1604</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">startStopOscillateVolume:</string>
+						<reference key="source" ref="232748680"/>
+						<reference key="destination" ref="645363741"/>
+					</object>
+					<int key="connectionID">1605</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">startStopFilter:</string>
+						<reference key="source" ref="232748680"/>
+						<reference key="destination" ref="139861448"/>
+					</object>
+					<int key="connectionID">1606</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2412,7 +2404,7 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1601</int>
+			<int key="maxID">1606</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2435,9 +2427,11 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 							<string>playPause:</string>
 							<string>showHideDockIcon:</string>
 							<string>startStopFilter:</string>
+							<string>startStopOscillateVolume:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2466,6 +2460,7 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 							<string>playPause:</string>
 							<string>showHideDockIcon:</string>
 							<string>startStopFilter:</string>
+							<string>startStopOscillateVolume:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2513,6 +2508,10 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 								<string key="name">startStopFilter:</string>
 								<string key="candidateClassName">id</string>
 							</object>
+							<object class="IBActionInfo">
+								<string key="name">startStopOscillateVolume:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -2536,6 +2535,7 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 							<string>playItem</string>
 							<string>rangeSlider</string>
 							<string>showAdvancedButton</string>
+							<string>showDockIcon</string>
 							<string>showDockIconButton</string>
 							<string>startStopButton</string>
 							<string>statusMenu</string>
@@ -2563,6 +2563,7 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 							<string>NSMenuItem</string>
 							<string>SMDoubleSlider</string>
 							<string>NSButton</string>
+							<string>BOOL</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSMenu</string>
@@ -2593,6 +2594,7 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 							<string>playItem</string>
 							<string>rangeSlider</string>
 							<string>showAdvancedButton</string>
+							<string>showDockIcon</string>
 							<string>showDockIconButton</string>
 							<string>startStopButton</string>
 							<string>statusMenu</string>
@@ -2670,6 +2672,10 @@ aW9ucyBMTEMgCmh0dHA6Ly93d3cuc25vd21pbnRjcy5jb20vCkFsbCByaWdodHMgcmVzZXJ2ZWQuA</s
 							<object class="IBToOneOutletInfo">
 								<string key="name">showAdvancedButton</string>
 								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">showDockIcon</string>
+								<string key="candidateClassName">BOOL</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">showDockIconButton</string>

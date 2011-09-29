@@ -9,6 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "SMDoubleSlider.h"
 
+#ifdef DEBUG
+#	define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#	define DLog(...)
+#endif
+
 @interface EnvelopAppDelegate : NSObject <NSApplicationDelegate> {
 @private
     
@@ -57,7 +63,7 @@
 - (IBAction) playPause:(id) sender;
 - (IBAction) changeCutoff:(id) sender;
 - (IBAction) changePresetCutoff:(id) sender;
-- (IBAction) startStopOscillateVolume;
+- (IBAction) startStopOscillateVolume:(id) sender;
 - (IBAction) changeOscillateRange:(id)sender;
 - (IBAction) changeOscillateSpeed:(id)sender;
 - (IBAction) changeOscillateStart:(id)sender;
@@ -65,6 +71,8 @@
 - (IBAction) startStopFilter:(id)sender;
 - (IBAction) changeEasing:(id)sender;
 
+
+- (void) changeFilter:(NSInteger)tag;
 - (void) savePrefs;
 - (void) loadPrefs;
 - (void) oscillate:(BOOL)start;

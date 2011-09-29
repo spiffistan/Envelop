@@ -31,10 +31,7 @@ int noiseType = 1;
 
 - (id)init
 {
-
-    
     b = 0.3f, c = 0.3f, d = 1, t = 0;    
-    
     return (self);
 }
 
@@ -43,8 +40,8 @@ int noiseType = 1;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
     [nc addObserver:self
-           selector:@selector(windowWillClose:)
-               name:NSWindowWillCloseNotification
+           selector:@selector(applicationWillTerminate:)
+               name:NSApplicationWillTerminateNotification
              object:nil];
     
     NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
@@ -94,20 +91,21 @@ int noiseType = 1;
 
 - (void) awakeFromNib
 {
+    [NSApp setDelegate: self]; 
+    
     statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
     NSImage * image = [NSImage imageNamed:@"statusbar-active.png"];
     
     [statusItem setImage:image];
     [statusItem setMenu:statusMenu];
     [statusItem setHighlightMode:YES];
+
 }
 
-- (void)windowWillClose:(NSNotification *)notification
+- (void) applicationWillTerminate: (NSNotification *)notification
 {
     [self savePrefs];
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -118,7 +116,6 @@ int noiseType = 1;
     CreateAU();
 	StartAU();
 
-    
     [pool drain];
 }
 /*
@@ -153,31 +150,35 @@ int noiseType = 1;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) changePresetCutoff:(id) sender 
+- (IBAction) changePresetCutoff:(id) sender 
+{
+    [self changeFilter:[sender tag]];
+}
+
+- (void) changeFilter:(NSInteger) tag
 {
     BOOL enableFilterSlider = NO;
     
-    switch ([sender tag]) 
+    switch (tag) 
     {
-        case kFilterBreeze:         cutoff = 100.0f;    break;
-        case kFilterRainstorm:      cutoff = 300.0f;    break;
-        case kFilterAirplane:       cutoff = 400.0f;    break;
-        case kFilterConcorde:       cutoff = 550.0f;    break;
-        case kFilterWaterfallFar:   cutoff = 650.0f;    break;
-        case kFilterWaterfallNear:  cutoff = 1200.0f;   break;
-        case kFilterWaterfallUnder: cutoff = 1700.0f;   break;
-        case kFilterSR71Blackbird:  cutoff = 2800.0f;   break;
-            
-        case kFilterCustom:
-            enableFilterSlider = YES;
-            break;
+    case kFilterBreeze:         cutoff = 100.0f;    break;
+    case kFilterRainstorm:      cutoff = 300.0f;    break;
+    case kFilterAirplane:       cutoff = 400.0f;    break;
+    case kFilterConcorde:       cutoff = 550.0f;    break;
+    case kFilterWaterfallFar:   cutoff = 650.0f;    break;
+    case kFilterWaterfallNear:  cutoff = 1200.0f;   break;
+    case kFilterWaterfallUnder: cutoff = 1700.0f;   break;
+    case kFilterSR71Blackbird:  cutoff = 2800.0f;   break;
+    
+    case kFilterCustom:
+        enableFilterSlider = YES;
+        break;
     }
     
     [hzLabel setStringValue:[NSString stringWithFormat:@"%d Hz", ((int) cutoff)]];
     [filterSlider setEnabled:enableFilterSlider];
     [filterSlider setFloatValue:cutoff];
 }
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -217,8 +218,6 @@ double easeInOutExpo (double t, double b, double c, double d)
 
 - (IBAction) changeEasing:(id)sender
 {
-    // NSLog(@"%ld", [sender tag]);
-
     switch ([sender tag]) 
     {
         case kEasingQuad:
@@ -360,7 +359,7 @@ BOOL countUp = YES;
 ////////////////////////////////////////////////////////////////////////////////
 
 - (IBAction) changeVolume:(id) sender
-{
+{    
     volume = [volumeSlider floatValue];
     
     SetAUVolume(volume);
@@ -372,6 +371,8 @@ BOOL countUp = YES;
 
 - (IBAction) startStopOscillateVolume:(id) sender
 {
+    DLog(@"startStopOscillateVolume:");
+    
     if([sender state] == NSOnState) 
     {
         [self oscillate:YES];
@@ -385,16 +386,18 @@ BOOL countUp = YES;
 
 - (void) oscillate:(BOOL) start
 {
+    DLog(@"oscillate:");
+    
     if(!start)
-    {
+    {        
         if([oscillateVolumeThread isExecuting]) {
+
             [oscillateVolumeThread cancel];
-            if([oscillateVolumeThread isFinished]) {
-                isOscillating = NO;
-                volumeSlider.enabled = YES;
-                rangeSlider.enabled = NO;
-                statusMenuVolumeSlider.enabled = YES;
-            }
+                
+            isOscillating = NO;
+            volumeSlider.enabled = YES;
+            rangeSlider.enabled = NO;
+            statusMenuVolumeSlider.enabled = YES;
         }
     } 
     else
@@ -416,7 +419,6 @@ BOOL countUp = YES;
 {
     if(isPlaying)
     {
-
         statusItem.image = [NSImage imageNamed:@"statusbar-inactive.png"];
         playItem.title = @"Play";
         startStopButton.title = @"Play";
@@ -442,19 +444,21 @@ BOOL countUp = YES;
     window.isVisible = YES;
 }
 
-
-
 - (void) savePrefs
-{    
+{        
     NSUserDefaults *preferences = [[NSUserDefaults standardUserDefaults] retain];
-        
+                
     if(preferences)
     {
         [preferences setInteger:[oscillationButton state] forKey:@"enableOscillation"];
-        [preferences setInteger:[oscillationSpeedPopUp tag] forKey:@"oscillationSpeed"];
+        [preferences setInteger:[oscillationSpeedPopUp selectedTag] forKey:@"oscillationSpeed"];
+        [preferences setInteger:[oscillationTypePopUp selectedTag] forKey:@"oscillationType"];
         [preferences setFloat:[rangeSlider floatLoValue] forKey:@"oscillationStart"];
         [preferences setFloat:([rangeSlider floatHiValue]-[rangeSlider floatLoValue]) forKey:@"oscillationRange"];
-        [preferences setInteger:[noiseTypePopUp tag] forKey:@"noiseType"];
+        [preferences setInteger:[noiseTypePopUp selectedTag] forKey:@"noiseType"];
+        [preferences setObject:[NSDate date] forKey:@"prefsLastSaved"];
+        [preferences setFloat:oscillateSpeed forKey:@"oscillationCustomSpeed"];
+        [preferences setInteger:[filterPopUp selectedTag] forKey:@"filterType"];
 
         [preferences synchronize];
     }
@@ -470,12 +474,16 @@ BOOL countUp = YES;
     {
         long pEnableOscillation = [preferences integerForKey:@"enableOscillation"];
         long pOscillationSpeed = [preferences integerForKey:@"oscillationSpeed"];
+        long pOscillationType = [preferences integerForKey:@"oscillationType"];
         float pOscillationStart = [preferences floatForKey:@"oscillationStart"];
         float pOscillationRange = [preferences floatForKey:@"oscillationRange"];
         long pNoiseType = [preferences integerForKey:@"noiseType"];
+        float pOscillationCustomSpeed = [preferences floatForKey:@"oscillationCustomSpeed"];
+        long pFilterType = [preferences integerForKey:@"filterType"];
         
         // Oscillation Speed
-        [oscillationSpeedPopUp setState:pOscillationSpeed];
+        
+        [oscillationSpeedPopUp selectItem:[[oscillationSpeedPopUp menu] itemWithTag:pOscillationSpeed]];
                 
         switch (pOscillationSpeed) 
         {
@@ -493,10 +501,8 @@ BOOL countUp = YES;
                 break;
             case kOscillateSpeedCustom:
                 [oscillateSpeedSlider setEnabled:YES];
-                oscillateSpeed = [oscillateSpeedSlider doubleValue];
-                break;
-            case kOscillateSpeedSlider:
-                oscillateSpeed = [oscillateSpeedSlider doubleValue];
+                oscillateSpeed = pOscillationCustomSpeed;
+                [oscillateSpeedSlider setFloatValue:oscillateSpeed];
                 break;
         }
         
@@ -512,14 +518,24 @@ BOOL countUp = YES;
         [rangeSlider setFloatHiValue:b+c];
         [rangeSlider setFloatLoValue:b];
         
-        [oscillationTypePopUp setState:pNoiseType];
+        // Oscillation Type 
+        
+        [oscillationTypePopUp selectItem:[[oscillationTypePopUp menu] itemWithTag:pOscillationType]];
+        
+        // Noise Type
         
         noiseType = (int) pNoiseType;
         
+        [noiseTypePopUp selectItem:[[noiseTypePopUp menu] itemWithTag:pNoiseType]];
+        
+        // Filter Type
+        
+        [filterPopUp selectItem:[[filterPopUp menu] itemWithTag:pFilterType]];
+        
+        [self changeFilter:pFilterType]; 
+                
         // Enable Oscillation
-        
-        NSLog(@"%ld", pEnableOscillation);
-        
+                
         if(pEnableOscillation) {
             [oscillationButton setState:NSOnState];
             [self oscillate:YES];
@@ -527,10 +543,7 @@ BOOL countUp = YES;
             [oscillationButton setState:NSOffState];
             [self oscillate:NO];
         }
-
-        // [noiseTypePopUp setState:noiseType];
-    }
-    
+    }    
     [preferences release];
 }
 
