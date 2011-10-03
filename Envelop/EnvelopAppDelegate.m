@@ -118,18 +118,6 @@ int noiseType = 1;
 
     [pool drain];
 }
-/*
-- (void) startMic:(id) sender
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    CreateMicrophoneAU();
-	StartMicrophoneAU();
-    
-    [pool drain];
-}
-*/
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -145,8 +133,6 @@ int noiseType = 1;
     b = [sender doubleLoValue];
     c = [sender doubleHiValue] - b;
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -331,8 +317,6 @@ BOOL countUp = YES;
     }
 }
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 
 - (IBAction) changeOscillateStart:(id)sender
@@ -353,8 +337,6 @@ BOOL countUp = YES;
             break;
     }
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -459,7 +441,9 @@ BOOL countUp = YES;
         [preferences setObject:[NSDate date] forKey:@"prefsLastSaved"];
         [preferences setFloat:oscillateSpeed forKey:@"oscillationCustomSpeed"];
         [preferences setInteger:[filterPopUp selectedTag] forKey:@"filterType"];
-
+        [preferences setBool:[filterButton state] forKey:@"filterEnabled"];
+        [preferences setBool:[showDockIconButton state] forKey:@"showDockIcon"];
+        
         [preferences synchronize];
     }
     
@@ -472,14 +456,16 @@ BOOL countUp = YES;
     
     if(preferences) 
     {
-        long pEnableOscillation = [preferences integerForKey:@"enableOscillation"];
-        long pOscillationSpeed = [preferences integerForKey:@"oscillationSpeed"];
-        long pOscillationType = [preferences integerForKey:@"oscillationType"];
-        float pOscillationStart = [preferences floatForKey:@"oscillationStart"];
-        float pOscillationRange = [preferences floatForKey:@"oscillationRange"];
-        long pNoiseType = [preferences integerForKey:@"noiseType"];
-        float pOscillationCustomSpeed = [preferences floatForKey:@"oscillationCustomSpeed"];
-        long pFilterType = [preferences integerForKey:@"filterType"];
+        NSInteger   pEnableOscillation = [preferences integerForKey:@"enableOscillation"];
+        NSInteger   pOscillationSpeed = [preferences integerForKey:@"oscillationSpeed"];
+        NSInteger   pOscillationType = [preferences integerForKey:@"oscillationType"];
+        Float32     pOscillationStart = [preferences floatForKey:@"oscillationStart"];
+        Float32     pOscillationRange = [preferences floatForKey:@"oscillationRange"];
+        NSInteger   pNoiseType = [preferences integerForKey:@"noiseType"];
+        Float32     pOscillationCustomSpeed = [preferences floatForKey:@"oscillationCustomSpeed"];
+        NSInteger   pFilterType = [preferences integerForKey:@"filterType"];
+        BOOL        pFilterEnabled = [preferences boolForKey:@"filterEnabled"];
+        BOOL        pShowDockIcon = [preferences boolForKey:@"showDockIcon"];
         
         // Oscillation Speed
         
@@ -528,6 +514,11 @@ BOOL countUp = YES;
         
         [noiseTypePopUp selectItem:[[noiseTypePopUp menu] itemWithTag:pNoiseType]];
         
+        // Filter enabled 
+        
+        [self enableFilter:pFilterEnabled];
+        [filterButton setState:pFilterEnabled];
+        
         // Filter Type
         
         [filterPopUp selectItem:[[filterPopUp menu] itemWithTag:pFilterType]];
@@ -543,6 +534,16 @@ BOOL countUp = YES;
             [oscillationButton setState:NSOffState];
             [self oscillate:NO];
         }
+        
+        // Dock icon
+        
+        if (pShowDockIcon) {
+            ProcessSerialNumber psn = { 0, kCurrentProcess };
+            TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+        } 
+        
+        [showDockIconButton setState:pShowDockIcon];        
+        
     }    
     [preferences release];
 }
@@ -550,6 +551,8 @@ BOOL countUp = YES;
 
 
 ////////////////////////////////////////////////////////////////////////////////
+
+/*
 
 - (IBAction) showHideAdvancedPanel:(id) sender
 {
@@ -582,10 +585,10 @@ BOOL countUp = YES;
     [audioTabSubView setFrame:audioTabSubViewFrame];
     [advancedBox setFrame:advancedBoxFrame];
 
-}
+} */
 
 ////////////////////////////////////////////////////////////////////////////////
-
+/*
 - (IBAction) showHideDockIcon:(NSButton *)sender
 {
     
@@ -593,19 +596,20 @@ BOOL countUp = YES;
     {
         ProcessSerialNumber psn = { 0, kCurrentProcess };
         TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-        [[[NSBundle mainBundle] infoDictionary] setValue:@"false" forKey:@"LSUIElement"];
+        [[[NSBundle mainBundle] infoDictionary] setValue:@"true" forKey:@"LSUIElement"];
+
     }
     else 
-    {
-        [[[NSBundle mainBundle] infoDictionary] setValue:@"true" forKey:@"LSUIElement"];
+    { 
+        [[[NSBundle mainBundle] infoDictionary] setValue:@"false" forKey:@"LSUIElement"];
     }
     
-    /*
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hideDockIcon"]) {
-        ProcessSerialNumber psn = { 0, kCurrentProcess };
-        TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-    }*/
-}
+    
+    //if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hideDockIcon"]) {
+    //    ProcessSerialNumber psn = { 0, kCurrentProcess };
+    //    TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+    //}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -613,12 +617,19 @@ BOOL countUp = YES;
 {
     if([sender state] == NSOnState)
     {
-        enableFilter = YES;
+        [self enableFilter:YES];
     }
     else 
     {
-        enableFilter = NO;
+        [self enableFilter:NO];
     }
 }
+
+- (void) enableFilter:(BOOL)enable
+{
+    enableFilter = enable;
+}
+
+
 
 @end

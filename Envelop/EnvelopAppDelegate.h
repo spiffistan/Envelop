@@ -77,6 +77,8 @@
 - (void) loadPrefs;
 - (void) oscillate:(BOOL)start;
 - (void) oscillateVolume;
+- (void) enableDockIcon:(BOOL)enable;
+- (void) enableFilter:(BOOL)enable;
 
 @end
 
